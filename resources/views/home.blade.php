@@ -3,91 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tentang Saya</title>
+    <title>Daftar Buku</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1b3a, #3b1e3d); /* biru tua ke pink tua */
+            color: #f5e9f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
-            /* Background biru tua gradasi */
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6, #93c5fd);
-            background-attachment: fixed;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 60px auto;
-            background: #ffffff;
-            border-radius: 16px;
             padding: 40px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            color: #ffd6e0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 192, 203, 0.4);
+        }
+
+        input[type="text"] {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid #a86fa9;
+            width: 320px;
+            background-color: #2a2644;
+            color: #fbeaff;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 8px rgba(255, 192, 203, 0.25);
+        }
+
+        input[type="text"]::placeholder {
+            color: #cfa7d4;
+        }
+
+        input[type="text"]:focus {
+            background-color: #382d53;
+            box-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 85%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            margin-top: 30px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(to right, #5a5ddf, #d15fa3);
+            color: #fff;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        td {
+            color: #f3e6ff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 182, 193, 0.15);
+            transition: 0.3s;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #d7b0e4;
+            font-size: 0.9rem;
+            opacity: 0.8;
             text-align: center;
         }
-        h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: #1e3a8a; /* biru tua */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        h2 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #475569; /* abu kebiruan */
-            font-weight: normal;
-        }
-        p {
-            line-height: 1.8;
-            margin-bottom: 25px;
-            color: #444;
-        }
-        .hobby {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        .hobby-item {
-            background: #bfdbfe; /* biru muda lembut */
-            color: #1e3a8a;
-            padding: 12px 22px;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-            transition: transform 0.2s, background 0.3s;
-            font-weight: 500;
-        }
-        .hobby-item:hover {
-            transform: translateY(-3px);
-            background: #93c5fd;
-        }
-        footer {
-            margin-top: 35px;
-            padding-top: 15px;
-            border-top: 2px solid #1e3a8a;
-            font-size: 14px;
-            color: #475569;
+
+        input[type="text"]:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Tentang Saya</h1>
-        <h2>Halo 👋, Saya Windy</h2>
+    <h1>📚 Daftar Buku</h1>
 
-        <p>
-            Saya berusia 18 tahun dan tertarik dengan dunia teknologi, khususnya dalam pengembangan aplikasi.  
-            Selain belajar, saya juga memiliki hobi yang membuat hidup lebih seimbang dan menyenangkan.
-        </p>
+    <input type="text" id="searchInput" placeholder="Cari judul atau penulis...">
 
-        <h2>Hobi Saya</h2>
-        <div class="hobby">
-            <div class="hobby-item">🏊‍♀️ Berenang</div>
-            <div class="hobby-item">🏸 Bulu Tangkis</div>
-            <div class="hobby-item">🥟 Makan Dimsum</div>
-        </div>
+    <table id="bookTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Judul Buku</th>
+                <th>Penulis</th>
+                <th>Tahun Terbit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($books as $index => $book)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $book['judul'] }}</td>
+                    <td>{{ $book['penulis'] }}</td>
+                    <td>{{ $book['tahun'] }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-        <footer>
-            &copy; 2025 Windy - Halaman Tentang Saya
-        </footer>
-    </div>
+    <footer>💙 Tugas Praktik Kerja Lapangan 2025 | Windy</footer>
+
+    <script>
+        const allBooks = @json($books);
+        const tableBody = document.querySelector("#bookTable tbody");
+        const searchInput = document.getElementById("searchInput");
+
+        searchInput.addEventListener("input", function() {
+            const search = this.value.toLowerCase();
+            const filtered = allBooks.filter(b =>
+                b.judul.toLowerCase().includes(search) ||
+                b.penulis.toLowerCase().includes(search)
+            );
+
+            tableBody.innerHTML = "";
+
+            if (filtered.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#ffd6e0;">Tidak ada buku ditemukan 😢</td></tr>`;
+                return;
+            }
+
+            filtered.forEach((book, index) => {
+                const row = `<tr style="animation: fadeIn 0.3s ease;">
+                    <td>${index + 1}</td>
+                    <td>${book.judul}</td>
+                    <td>${book.penulis}</td>
+                    <td>${book.tahun}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        });
+    </script>
 </body>
 </html>

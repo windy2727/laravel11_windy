@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('home'); // akses di http://127.0.0.1:8000
-});
+// route ke controller
+Route::get('/', [HomeController::class, 'index']);
