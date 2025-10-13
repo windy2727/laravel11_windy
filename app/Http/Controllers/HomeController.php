@@ -31,6 +31,7 @@ class HomeController extends Controller
             ['judul' => 'Koala Kumal', 'penulis' => 'Raditya Dika', 'tahun' => 2015],
         ];
 
+        // 🔍 Ambil input pencarian
         $search = $request->input('search');
 
         if ($search) {
@@ -40,6 +41,10 @@ class HomeController extends Controller
             });
         }
 
-        return view('home', compact('books', 'search'));
+        // 💬 Tambahkan pesan ke view
+        $message = "Selamat datang di daftar buku favorit Windy 💖📚";
+
+        // Kirim data ke view
+        return view('home', compact('books', 'search', 'message'));
     }
 }

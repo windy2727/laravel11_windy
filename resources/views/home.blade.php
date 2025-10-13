@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1b3a, #3b1e3d); /* biru tua ke pink tua */
+            background: linear-gradient(135deg, #1a1b3a, #3b1e3d);
             color: #f5e9f7;
             display: flex;
             flex-direction: column;
@@ -24,6 +24,21 @@
             margin-bottom: 25px;
             text-align: center;
             text-shadow: 0 0 10px rgba(255, 192, 203, 0.4);
+        }
+
+        .message {
+            background-color: rgba(93, 63, 211, 0.2);
+            border: 2px solid #ff9ecf;
+            color: #ffd6e0;
+            padding: 14px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            width: 80%;
+            animation: fadeIn 0.8s ease;
+            box-shadow: 0 0 10px rgba(255, 182, 193, 0.4);
         }
 
         input[type="text"] {
@@ -103,6 +118,14 @@
     </style>
 </head>
 <body>
+
+    {{-- 💬 Pesan dari Controller --}}
+    @if(isset($message))
+        <div class="message">
+            {{ $message }}
+        </div>
+    @endif
+
     <h1>📚 Daftar Buku</h1>
 
     <input type="text" id="searchInput" placeholder="Cari judul atau penulis...">
