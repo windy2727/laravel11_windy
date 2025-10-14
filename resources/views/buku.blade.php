@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Siswa</title>
+    <title>Data Buku</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -58,24 +58,26 @@
     </style>
 </head>
 <body>
-    <h1>📘 Daftar Siswa</h1>
+    <h1>📚 Daftar Buku</h1>
 
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>Kelas</th>
-                <th>Jurusan</th>
+                <th>Judul Buku</th>
+                <th>Penulis</th>
+                <th>Penerbit</th>
+                <th>Tahun Terbit</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($siswas as $index => $siswa)
+            @foreach ($bukus as $index => $buku)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $siswa->nama }}</td>
-                <td>{{ $siswa->kelas }}</td>
-                <td>{{ $siswa->jurusan }}</td>
+                <td>{{ $buku->judul }}</td>
+                <td>{{ $buku->penulis }}</td>
+                <td>{{ $buku->penerbit }}</td>
+                <td>{{ $buku->tahun }}</td>
             </tr>
             @endforeach
         </tbody>

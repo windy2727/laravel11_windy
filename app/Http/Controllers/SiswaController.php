@@ -9,10 +9,7 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        // Ambil semua data siswa dari database
-        $siswas = Siswa::all();
-
-        // Kirim data ke view
+        $siswas = Siswa::all(); // ambil semua data dari tabel siswas
         return view('siswa', compact('siswas'));
     }
 }
